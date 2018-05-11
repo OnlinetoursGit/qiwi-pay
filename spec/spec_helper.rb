@@ -3,7 +3,7 @@ require 'qiwi_pay'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+  config.example_status_persistence_file_path = '.rspec_status'
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
@@ -11,4 +11,10 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+def credentials
+  QiwiPay::Credentials.new secret: :secret,
+                           cert: nil,
+                           key: nil
 end

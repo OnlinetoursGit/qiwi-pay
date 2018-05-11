@@ -18,7 +18,9 @@ module QiwiPay
 end
 
 require "qiwi_pay/version"
+require "qiwi_pay/payment_operation"
 require "qiwi_pay/cheque"
+require "qiwi_pay/credentials"
 require "qiwi_pay/signature"
 require "qiwi_pay/confirmation"
 
