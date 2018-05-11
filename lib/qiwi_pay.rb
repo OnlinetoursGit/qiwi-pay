@@ -1,10 +1,4 @@
 # frozen_string_literal: true
-require "qiwi_pay/version"
-require "qiwi_pay/wpf/signature"
-require "qiwi_pay/wpf/confirmation"
-require "qiwi_pay/wpf/payment_operation"
-require "qiwi_pay/wpf/sale_operation"
-require "qiwi_pay/wpf/cheque"
 
 module QiwiPay
   # Web Payment Form interface interaction implementation
@@ -22,3 +16,11 @@ module QiwiPay
   module Api
   end
 end
+
+require "qiwi_pay/version"
+require "qiwi_pay/cheque"
+require "qiwi_pay/signature"
+require "qiwi_pay/confirmation"
+
+require "qiwi_pay/wpf/payment_operation"
+require "qiwi_pay/wpf/sale_operation"

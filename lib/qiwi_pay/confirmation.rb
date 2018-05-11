@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module QiwiPay::Wpf
-  # Qiwi payment confirmation
+module QiwiPay
+  # Qiwi payment confirmation (callback)
   class Confirmation
   end
 end
