@@ -14,6 +14,11 @@ module QiwiPay
   # JSON API interaction implementation
   # @see https://developer.qiwi.com/ru/qiwipay/index.html?json#section-6
   module Api
+    # QiwiPay API host
+    ENDPOINT_HOST = 'acquiring.qiwi.com'
+
+    # QiwiPay API endpoint
+    ENDPOINT_PATH = '/merchant/direct'
   end
 end
 
@@ -28,3 +33,6 @@ require "qiwi_pay/confirmation"
 require "qiwi_pay/wpf/payment_operation"
 require "qiwi_pay/wpf/sale_operation"
 require "qiwi_pay/wpf/auth_operation"
+
+require "qiwi_pay/api/payment_operation"
+require "qiwi_pay/api/response"
