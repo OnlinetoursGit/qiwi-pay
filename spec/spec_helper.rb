@@ -1,6 +1,4 @@
-require 'bundler/setup'
 require 'qiwi_pay'
-
 require_relative 'support/external_requests'
 
 RSpec.configure do |config|
@@ -17,6 +15,6 @@ end
 
 def credentials
   QiwiPay::Credentials.new secret: :secret,
-                           cert: nil,
-                           key: nil
+                           cert: OpenSSL::X509::Certificate.new,
+                           key: OpenSSL::PKey::RSA.new
 end
