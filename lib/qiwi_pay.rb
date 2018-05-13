@@ -35,4 +35,5 @@ require "qiwi_pay/wpf/sale_operation"
 require "qiwi_pay/wpf/auth_operation"
 
 require "qiwi_pay/api/payment_operation"
+require "qiwi_pay/api/status_operation"
 require "qiwi_pay/api/response"
