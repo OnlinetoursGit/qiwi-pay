@@ -70,7 +70,11 @@ RSpec.describe QiwiPay::Api::StatusOperation do
     describe 'making valid request' do
       it 'should make POST request with correct parameters' do
         expect(api_client).to receive(:post) do |params|
-          expect(params).to eq '{"opcode":"30","merchant_site":"123","order_id":"dsfkjdslkfjdlks","sign":"30067d2400b2b012e31f9300ff2c8d609faf9400556a50a6bfb6ffca129991ac"}'
+          expect(params).to eq '{"opcode":"30",'\
+                               '"txn_id":"1265",'\
+                               '"merchant_site":"123",'\
+                               '"order_id":"dsfkjdslkfjdlks",'\
+                               '"sign":"07bbb1f2f41327e64f7f80b24c9a64ff887d8f0b4abe8cca04cc4b7e0eeaf08f"}'
           ok_response
         end
         subject.perform

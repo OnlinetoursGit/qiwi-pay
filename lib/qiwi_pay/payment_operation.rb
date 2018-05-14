@@ -16,6 +16,7 @@ module QiwiPay
     end
 
     ATTRIBUTES = %i[
+      txn_id
       merchant_site currency sign amount order_id
       email country city region address phone
       cf1 cf2 cf3 cf4 cf5
