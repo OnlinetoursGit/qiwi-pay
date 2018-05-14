@@ -77,7 +77,8 @@ module QiwiPay
     # @param params [Hash] Request params
     def initialize(crds, params)
       ALLOWED_PARAMS.each do |pname|
-        instance_variable_set "@#{pname}", params[pname] || params[pname.to_s]
+        pval = params.fetch(pname, nil) || params.fetch(pname.to_s, nil)
+        instance_variable_set "@#{pname}", pval
       end
       @secret = crds.secret
     end

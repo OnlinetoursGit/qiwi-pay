@@ -59,4 +59,18 @@ RSpec.describe QiwiPay::Confirmation do
       end
     end
   end
+
+  describe 'with creepy hash as params' do
+    let(:params) { Hash.new(:some_val) }
+
+    before do
+      params[:txn_id] = '20728960050'
+      params[:email] = 'mklimenko@onlinetours.ru'
+    end
+
+    it 'extracts params' do
+      expect(subject.txn_id).to eq params[:txn_id]
+      expect(subject.email).to eq params[:email]
+    end
+  end
 end
