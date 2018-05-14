@@ -73,12 +73,13 @@ module QiwiPay
     attr_reader(*ALLOWED_PARAMS)
     attr_reader :secret
 
+    # @param crds [Credentials] Api access credentials object
     # @param params [Hash] Request params
-    def initialize(secret, params)
+    def initialize(crds, params)
       ALLOWED_PARAMS.each do |pname|
         instance_variable_set "@#{pname}", params[pname] || params[pname.to_s]
       end
-      @secret = secret
+      @secret = crds.secret
     end
 
     # Check server IP address validity

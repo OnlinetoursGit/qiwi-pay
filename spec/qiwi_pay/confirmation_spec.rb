@@ -18,8 +18,7 @@ RSpec.describe QiwiPay::Confirmation do
       sign: '27A56431CD3A14BA3455956766F772EA5732FC5E1C74541B33F58D7F7766D98A'
     }
   end
-  let(:secret) { credentials.secret }
-  subject { described_class.new secret, params }
+  subject { described_class.new credentials, params }
 
   describe '#sign calculates signature for params' do
     it { expect(subject.send(:sign)).to eq params[:sign] }
