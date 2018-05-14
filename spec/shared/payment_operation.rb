@@ -1,4 +1,4 @@
-RSpec.describe QiwiPay::PaymentOperation do
+RSpec.shared_examples "payment_operation" do
   let(:params) do
     {
       merchant_site: 1234,
@@ -9,7 +9,7 @@ RSpec.describe QiwiPay::PaymentOperation do
       callback_url: 'https://example.com/notify'
     }
   end
-  let(:sign) { 'ab8543951d8ace7d4e828a1611cd8576d10b2f83d8d5298a3599b587d90515ac' }
+
   subject { described_class.new credentials, params }
 
   describe 'constructor' do
@@ -28,36 +28,29 @@ RSpec.describe QiwiPay::PaymentOperation do
     end
   end
 
-  it 'formats amount as currency' do
-    expect(subject.amount).to eq '100.13'
+  # if amount parameter present
+  if described_class.in_params.include? :amount
+    it 'formats amount as currency' do
+      expect(subject.amount).to eq '100.13'
+    end
   end
 
   it 'requires https callback url' do
     expect do
       subject.callback_url = 'http://example.com/notify'
     end.to raise_error ArgumentError
-
   end
 
   describe '#request_params' do
-    before do
-      subject.instance_eval { define_singleton_method :opcode, -> { 1 } }
-    end
-
     it 'returns hash with request parameters' do
       params = subject.send(:request_params)
       expect(params).to be_a Hash
-      expect(params.keys).to match_array %i[amount
-                                            cheque
-                                            currency
-                                            merchant_site
-                                            opcode
-                                            callback_url
-                                            sign]
+      params_not_in_list = params.keys - described_class.in_params
+      expect(params_not_in_list).to match_array %i[opcode sign]
     end
 
     it 'calculates signature parameter' do
-      expect(subject.send(:request_params)[:sign]).to eq sign
+      expect(subject.send(:request_params)[:sign]).to match /^[\dabcdef]+$/
     end
   end
 end

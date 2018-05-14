@@ -73,5 +73,11 @@ module QiwiPay::Api
     def self.description
       'Запрос статуса операции'
     end
+
+    private
+
+    def self.in_params
+      %i[merchant_site txn_id order_id].freeze
+    end
   end
 end

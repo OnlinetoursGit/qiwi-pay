@@ -30,7 +30,7 @@ module QiwiPay
 
     def initialize(credentials, params = {})
       params.each do |k, v|
-        send("#{k}=", v) if ATTRIBUTES.include?(k.to_sym)
+        send("#{k}=", v) if in_params.include?(k.to_sym)
       end
       @credentials = credentials
     end
@@ -58,6 +58,15 @@ module QiwiPay
     private
 
     attr_reader :credentials
+
+    # @return [Array<Symbol>] Operation input parameters
+    def self.in_params
+      raise NotImplementedError
+    end
+
+    def in_params
+      self.class.in_params
+    end
 
     # Builds hash with meaningful params only
     # @return [Hash]

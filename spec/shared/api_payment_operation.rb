@@ -1,4 +1,4 @@
-RSpec.describe QiwiPay::Api::PaymentOperation do
+RSpec.shared_examples "api_payment_operation" do
   let(:params) do
     {
       merchant_site: 1234

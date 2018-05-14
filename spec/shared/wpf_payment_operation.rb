@@ -1,4 +1,4 @@
-RSpec.describe QiwiPay::Wpf::PaymentOperation do
+RSpec.shared_examples "wpf_payment_operation" do
   let(:params) do
     {
       merchant_site: 123,
@@ -8,18 +8,13 @@ RSpec.describe QiwiPay::Wpf::PaymentOperation do
 
   subject { described_class.new credentials, params }
 
-  before do
-    # Stub unimplemented method
-    allow(subject).to receive(:opcode).and_return(0)
-  end
-
   describe '#params' do
     it 'returns hash of params for html form' do
       res = subject.params
       expect(res).to be_a Hash
       expect(res[:method]).to eq :get
       expect(res[:url]).to eq 'https://pay.qiwi.com/paypage/initial'
-      expect(res[:opcode]).to eq '0'
+      expect(res[:opcode]).to eq described_class.opcode.to_s
       params.each do |k, v|
         expect(res[k].to_s).to eq v.to_s
       end
@@ -31,7 +26,7 @@ RSpec.describe QiwiPay::Wpf::PaymentOperation do
     it 'returns QiwiPay form url' do
       url = subject.url
       expect(url).to start_with 'https://pay.qiwi.com/paypage/initial?'
-      expect(url).to include 'opcode=0'
+      expect(url).to include "opcode=#{described_class.opcode}"
       expect(url).to include 'merchant_site=123'
       expect(url).to include 'merchant_uid=321'
       expect(url).to include '&sign='
