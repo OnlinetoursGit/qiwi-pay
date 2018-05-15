@@ -6,7 +6,8 @@ RSpec.shared_examples "payment_operation" do
       amount: 100.134,
       abra_kadabra: 'abracadabra',
       cheque: 'asdljhaskjdhkajsdhkaj',
-      callback_url: 'https://example.com/notify'
+      callback_url: 'https://example.com/notify',
+      order_expire: Time.new(2018, 1, 1, 1, 1, 1) + 3600
     }
   end
 
@@ -25,6 +26,12 @@ RSpec.shared_examples "payment_operation" do
     it 'memoizes credentials internally' do
       expect(subject.instance_variable_get(:@credentials)).to be_a QiwiPay::Credentials
       expect { subject.secret }.to raise_error NoMethodError
+    end
+
+    if described_class.in_params.include? :order_expire
+      it 'converts time to string' do
+        expect(subject.order_expire).to start_with '2018-01-01T02:01:01'
+      end
     end
   end
 

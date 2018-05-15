@@ -55,6 +55,21 @@ module QiwiPay
       @callback_url = url
     end
 
+    # @param time [String;Time] time to expire order at
+    #   Must be a string in format {YYYY-MM-DDThh:mm:ss±hh:mm} or
+    #   anything responding to {strftime} message
+    # @example
+    #   op.order_expire = Time.now + 3600
+    #   op.order_expire = 15.minutes.since
+    def order_expire=(time)
+      @order_expire =
+        if time.respond_to? :strftime
+          time.strftime('%FT%T%:z')
+        else
+          time.to_s
+        end
+    end
+
     private
 
     attr_reader :credentials

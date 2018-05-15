@@ -88,6 +88,7 @@ op = QiwiPay::Wpf::SaleOperation.new crds,
                                      order_id: 1234,
                                      product_name: 'Оплата тура',
                                      merchant_uid: 432101,
+                                     order_expire: Time.now + 3600,
                                      callback_url: 'https://example.com/payment/callback'
 op.cheque = cheque
 ```
