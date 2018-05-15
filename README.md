@@ -169,7 +169,7 @@ Following operations are available for now:
 * *status* - `QiwiPay::Api::StatusOperation` class
 
 #### Status operation
-##### Create `status` operation object
+##### Create and perform `status` operation object
 ```
 op = QiwiPay::Api::StatusOperation.new crds,
                                        merchant_site: 111111,
@@ -178,12 +178,14 @@ op = QiwiPay::Api::StatusOperation.new crds,
 response = op.perform
 ```
 
+Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow you to get text messages for errors, codes and statuses. See https://developer.qiwi.com/ru/qiwipay/index.html?json#txn_status
+
 ##### Operation succeeded
 ```
 resp.error_code
 => 0
 resp.error_message
-=> "No error"
+=> "No errors"
 ```
 
 ##### Operation failed
