@@ -55,14 +55,14 @@ crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 See https://developer.qiwi.com/ru/qiwipay/index.html?json#cheque for details.
 ```
-cheque = QiwiPay::Cheque.new seller_id: 12345678901,
-                             cheque_type: 1,
+cheque = QiwiPay::Cheque.new seller_id:        12345678901,
+                             cheque_type:      QiwiPay::Cheque::Type::INFLOW,
                              customer_contact: 'client@example.com',
-                             tax_system: 0,
+                             tax_system:       QiwiPay::Cheque::TaxMode::USN_DR,
                              positions: [{
-                                quantity: 1,
-                                price: 10_000,
-                                tax: 1,
+                                quantity:    1,
+                                price:       10_000,
+                                tax:         QiwiPay::Cheque::VAT::NONE,
                                 description: 'Оплата тура #1234'
                              }]
 ```
