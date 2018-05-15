@@ -1,4 +1,4 @@
-require 'qiwi_pay'
+require 'qiwi-pay'
 require_relative 'support/external_requests'
 
 RSpec.configure do |config|

@@ -7,5 +7,5 @@ task :default => :spec
 
 task :c => :console
 task :console do
-  sh 'bundle exec irb -r qiwi_pay'
+  sh 'bundle exec irb -r qiwi-pay'
 end
