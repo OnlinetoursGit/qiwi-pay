@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'qiwi-pay'
   spec.version       = QiwiPay::VERSION
   spec.authors       = ['Michael Klimenko']
-  spec.email         = ['michaelkl@mail.ru']
+  spec.email         = ['mklimenko@onlinetours.ru']
 
   spec.summary       = 'QiwiPay WPF/API support'
   spec.description   = 'Provides support for payment operations using QiwiPay WPF and API service'
