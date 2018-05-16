@@ -106,7 +106,7 @@ module QiwiPay
       calculated_sign.upcase == sign
     end
 
-    # Check if payment operation was successful
+    # Check if payment operation was successful (has valid sign and no errors)
     def success?
       valid_sign? && !error?
     end
@@ -114,6 +114,15 @@ module QiwiPay
     # Check if error code present in response
     def error?
       !error_code.zero?
+    end
+
+    # Converts confirmation data to hash
+    def to_h
+      {}.tap do |h|
+        ALLOWED_PARAMS.each { |p| h[p] = send(p) }
+        h[:txn_status_message] = txn_status_message
+        h[:txn_type_message] = txn_type_message
+      end
     end
 
     private

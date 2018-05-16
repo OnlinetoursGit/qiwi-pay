@@ -99,4 +99,15 @@ RSpec.describe QiwiPay::Confirmation do
       expect(subject.email).to eq params[:email]
     end
   end
+
+  describe '#to_h converts object to hash' do
+    it { expect(subject.to_h).to be_a Hash }
+    it 'includes all confirmation params' do
+      described_class::ALLOWED_PARAMS.each do |p|
+        expect(subject.to_h.keys).to include p
+      end
+    end
+    it { expect(subject.to_h.keys).to include :txn_status_message }
+    it { expect(subject.to_h.keys).to include :txn_type_message }
+  end
 end
