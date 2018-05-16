@@ -35,27 +35,31 @@ RSpec.describe QiwiPay::Confirmation do
     end
   end
 
-  describe '#success? tests operation for successfulness' do
+  describe '#success? and #error? test operation for successfulness' do
     describe 'with no error' do
       before { params[:error_code] = '0' }
 
       describe 'with valid sign' do
         before { params[:sign] = '1E61076344971F540138D1107FB6E3E31A7E07EF811CE7E91F31178DF8EFDD5C' }
         it { expect(subject.success?).to be_truthy }
+        it { expect(subject.error?).to be_falsy }
       end
       describe 'with invalid sign' do
         before { params[:sign] = 'invalidsignature' }
         it { expect(subject.success?).to be_falsy }
+        it { expect(subject.error?).to be_falsy }
       end
     end
 
     describe 'with error present' do
       describe 'with valid sign' do
         it { expect(subject.success?).to be_falsy }
+        it { expect(subject.error?).to be_truthy }
       end
       describe 'with invalid sign' do
         before { params[:sign] = 'invalidsignature' }
         it { expect(subject.success?).to be_falsy }
+        it { expect(subject.error?).to be_truthy }
       end
     end
   end

@@ -98,7 +98,12 @@ module QiwiPay
 
     # Check if payment operation was successful
     def success?
-      valid_sign? && error_code.to_i.zero?
+      valid_sign? && !error?
+    end
+
+    # Check if error code present in response
+    def error?
+      !error_code.to_i.zero?
     end
 
     private
