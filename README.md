@@ -139,7 +139,7 @@ conf.valid_sign?
 
 # Read confirmation data
 conf.txn_id
-=> "11728960050"
+=> 11728960050
 
 conf.order_id
 => 1234
@@ -150,6 +150,9 @@ conf.error_code
 conf.error_message
 => "No error"
 
+conf.error?
+=> false
+
 conf.txn_status_message
 => "Authorized"
 
@@ -159,6 +162,40 @@ conf.txn_type_message
 # Check if transaction was successful (valid signature and no error)
 conf.success?
 => true
+
+# Get all confirmation data as a hash
+conf.to_h
+=> {:txn_id=>11728960050,
+ :txn_status=>2,
+ :txn_type=>1,
+ :txn_date=>"2018-05-03T15:55:18+00:00",
+ :error_code=>0,
+ :pan=>"510000******0082",
+ :amount=>"10000.00",
+ :currency=>643,
+ :auth_code=>nil,
+ :eci=>nil,
+ :card_name=>nil,
+ :card_bank=>nil,
+ :order_id=>1234,
+ :ip=>"196.54.55.20",
+ :email=>"client@example.com",
+ :country=>"RUS",
+ :city=>"Moscow",
+ :region=>nil,
+ :address=>nil,
+ :phone=>nil,
+ :cf1=>nil,
+ :cf2=>nil,
+ :cf3=>nil,
+ :cf4=>nil,
+ :cf5=>nil,
+ :product_name=>"Оплата тура",
+ :card_token=>nil,
+ :card_token_expire=>nil,
+ :sign=>"27A56431CD3A14BA34...8A",
+ :txn_status_message=>"Authorized",
+ :txn_type_message=>"Single-step purchase"}
 ```
 
 ### Perform payment operations using WPF
