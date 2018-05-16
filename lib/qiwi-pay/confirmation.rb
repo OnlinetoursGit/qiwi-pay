@@ -50,6 +50,15 @@ module QiwiPay
       sign
     ].freeze
 
+    # Parameters of integer type
+    INTEGER_PARAMS = %i[
+      txn_id
+      txn_status
+      txn_type
+      error_code
+      currency
+    ]
+
     # Request params used to calculate signature
     SIGN_PARAMS = %i[
       txn_id
@@ -78,6 +87,7 @@ module QiwiPay
     def initialize(crds, params)
       ALLOWED_PARAMS.each do |pname|
         pval = params.fetch(pname, nil) || params.fetch(pname.to_s, nil)
+        pval = pval.to_i if INTEGER_PARAMS.include?(pname)
         instance_variable_set "@#{pname}", pval
       end
       @secret = crds.secret
@@ -103,7 +113,7 @@ module QiwiPay
 
     # Check if error code present in response
     def error?
-      !error_code.to_i.zero?
+      !error_code.zero?
     end
 
     private

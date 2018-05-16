@@ -68,12 +68,34 @@ RSpec.describe QiwiPay::Confirmation do
     let(:params) { Hash.new(:some_val) }
 
     before do
-      params[:txn_id] = '20728960050'
+      params[:txn_id] = 20728960050
       params[:email] = 'mklimenko@onlinetours.ru'
     end
 
     it 'extracts params' do
       expect(subject.txn_id).to eq params[:txn_id]
+      expect(subject.email).to eq params[:email]
+    end
+  end
+
+  describe 'with string params values given' do
+    let(:params) { Hash.new(:some_val) }
+
+    before do
+      params[:txn_id] = '20728960050'
+      params[:txn_status] = '1'
+      params[:txn_type] = '2'
+      params[:currency] = '643'
+      params[:error_code] = '11'
+      params[:email] = 'mklimenko@onlinetours.ru'
+    end
+
+    it 'converts certain valuest to integer' do
+      expect(subject.txn_id).to eq params[:txn_id].to_i
+      expect(subject.txn_status).to eq params[:txn_status].to_i
+      expect(subject.txn_type).to eq params[:txn_type].to_i
+      expect(subject.currency).to eq params[:currency].to_i
+      expect(subject.error_code).to eq params[:error_code].to_i
       expect(subject.email).to eq params[:email]
     end
   end
