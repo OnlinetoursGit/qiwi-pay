@@ -198,7 +198,7 @@ conf.to_h
  :txn_type_message=>"Single-step purchase"}
 ```
 
-### Perform payment operations using WPF
+### Perform payment operations using JSON API
 Following operations are available for now:
 
 * *capture* - `QiwiPay::Api::CaptureOperation` class
@@ -220,27 +220,52 @@ Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow y
 
 ##### Operation succeeded
 ```
-resp.success?
+response.success?
 => true
-resp.error_code
+response.error_code
 => 0
-resp.error_message
+response.error_message
 => "No errors"
 ```
 
 ##### Operation failed
 ```
-resp.success?
+response.success?
 => false
-resp.http_code
+response.http_code
 => 200
-resp.error_code
+response.error_code
 => 8021
-r.error_message
-=> "Merchant site not found
+response.error_message
+=> "Merchant site not found"
 ```
 
+#### Refund/reversal operation
+Both operations are performed in the same way, just use the right class.
 
+```
+op = QiwiPay::Api::RefundOperation.new crds,
+                                       merchant_site: 111111,
+                                       txn_id: 11728960050,
+                                       amount: 500,
+                                       cheque: cheque
+response = op.perform
+=> #<QiwiPay::Api::Response http_code=200 error_code=8018 ...>
+response.success?
+=> false
+response.http_code
+=> 200
+response.error_code
+=> 8018
+response.error_message
+=> "Parsing error"
+response.to_h
+=> {:request_id => "01234567-89ab-cdef-0123-456789abcdef",
+ :error_message => "Parsing error",
+ :error_code => 8018,
+ :http_code => 200
+}
+```
 
 ## Development
 
