@@ -8,9 +8,28 @@ module QiwiPay::Api
   class Response < OpenStruct
     include QiwiPay::MessagesForCodes
 
+    # Parameters of integer type
+    INTEGER_PARAMS = %w[
+      txn_id
+      txn_status
+      txn_type
+      error_code
+      currency
+    ]
+
+    # @param response_code [Integer] HTTP response status code
+    # @param response_body [String] Response body in JSON
     def initialize(response_code, response_body)
-      super JSON.parse(response_body)
+      params = JSON.parse(response_body)
+      (INTEGER_PARAMS & params.keys).each do |p|
+        params[p] = params[p] && params[p].to_i
+      end
+      super params
       send(:http_code=, response_code)
+    end
+
+    def success?
+      http_code == 200 && error_code == 0
     end
   end
 end

@@ -220,6 +220,8 @@ Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow y
 
 ##### Operation succeeded
 ```
+resp.success?
+=> true
 resp.error_code
 => 0
 resp.error_message
@@ -228,6 +230,8 @@ resp.error_message
 
 ##### Operation failed
 ```
+resp.success?
+=> false
 resp.http_code
 => 200
 resp.error_code
