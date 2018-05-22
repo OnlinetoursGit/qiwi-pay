@@ -77,7 +77,7 @@ cheque = QiwiPay::Cheque.new seller_id:        12345678901,
                                 quantity:    1,
                                 price:       10_000,
                                 tax:         QiwiPay::Cheque::VAT::NONE,
-                                description: 'Оплата тура #1234'
+                                description: 'Order #1234 payment'
                              }]
 ```
 
@@ -100,7 +100,7 @@ op = QiwiPay::Wpf::SaleOperation.new crds,
                                      city: 'Moscow',
                                      amount: 10_000,
                                      order_id: 1234,
-                                     product_name: 'Оплата тура',
+                                     product_name: 'Flowers',
                                      merchant_uid: 432101,
                                      order_expire: Time.now + 3600,
                                      callback_url: 'https://example.com/payment/callback'
@@ -127,14 +127,14 @@ op.params
  :email=>"client@example.com",
  :country=>"RUS",
  :city=>"Moscow",
- :product_name=>"Оплата тура",
+ :product_name=>"Flowers",
  :merchant_uid=>"432101",
  :callback_url=>"https://example.com/payment/callback",
  :sign=>"...c4dbf..."}
 ```
 
 ### Process QiwiPay confirmation callback
-After payment operation has been finished you will receive a confirmation callback request from Qiwi service. Use this request's `params` hash to build `QiwiPay::Confirmation` object.
+After payment operation has been finished you will receive a confirmation callback request from Qiwi service. Use the request's (`ActionDispatch::Request`, `Rack::Request` or whatever it is) parameters hash to build `QiwiPay::Confirmation` object.
 
 ```ruby
 conf = QiwiPay::Confirmation.new crds, request.params
@@ -204,7 +204,7 @@ conf.to_h
  :cf3=>nil,
  :cf4=>nil,
  :cf5=>nil,
- :product_name=>"Оплата тура",
+ :product_name=>"Flowers",
  :card_token=>nil,
  :card_token_expire=>nil,
  :sign=>"27A56431CD3A14BA34...8A",
