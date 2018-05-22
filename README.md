@@ -6,6 +6,18 @@ Provides support for payment operations using QiwiPay WPF and API services.
 
 See https://developer.qiwi.com/ru/qiwipay for API description.
 
+## Table of contents
+
+  *  [Installation](#installation)
+  *  [Usage](#usage)
+      * [Prepare credentials object](#prepare-credentials-object)
+      * [Create cheque object](#create-cheque-object)
+      * [Perform payment operations using WPF](#perform-payment-operations-using-wpf)
+      * [Process QiwiPay confirmation callback](#process-qiwipay-confirmation-callback)
+      * [Perform payment operations using JSON API](#perform-payment-operations-using-json-api)
+  * [Development](#development)
+  * [Contributing](#contributing)
+
 ## Installation
 
 Add this line to your application's Gemfile:
