@@ -32,7 +32,7 @@ There are three types of interactions with QiwiPay service:
 ### Prepare credentials object
 To perform any request you must provide your QiwiPay credentials. For doing that the `Credentials` object should be used.
 
-```
+```ruby
 # Create credentials object
 # You can use PKCS#12 container
 p12 = OpenSSL::PKCS12.new(File.read('qiwi.p12'))
@@ -54,7 +54,7 @@ crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ### Create cheque object
 
 See https://developer.qiwi.com/ru/qiwipay/index.html?json#cheque for details.
-```
+```ruby
 cheque = QiwiPay::Cheque.new seller_id:        12345678901,
                              cheque_type:      QiwiPay::Cheque::Type::INFLOW,
                              customer_contact: 'client@example.com',
@@ -77,7 +77,7 @@ Operations are used in very similar way. Use `QiwiPay::Wpf::SaleOperation` class
 See https://developer.qiwi.com/ru/qiwipay/index.html?json#qiwipay-wpf for details.
 
 #### Create payment operation object
-```
+```ruby
 op = QiwiPay::Wpf::SaleOperation.new crds,
                                      merchant_site: 111_111,
                                      currency: 643,
@@ -94,14 +94,14 @@ op.cheque = cheque
 ```
 
 #### Build redirection URL for sale operation form
-```
+```ruby
 op.url
 => 'https://pay.qiwi.com/paypage/initial?opcode=1&merchant_site=111111&currency=643&amount=1000.00&order_id=1234&email=client@example.com&country=RUS&city=Moscow&product_name=%D0%9E%D0%BF%D0%BB%D0%B0%D1%82%D0%B0+%D1%82%D1%83%D1%80%D0%B0&merchant_uid=432101&callback_url=https%3A%2F%example.com%2Fpayment%2Fcallback&sign=...c4dbf...'
 ```
 
 #### Build form params WPF sale operation
 This may be useful if you would like to construct redirection URL or invisible payment form by yourself.
-```
+```ruby
 op.params
 => {:method=>:get,
  :url=>"https://pay.qiwi.com/paypage/initial",
@@ -122,13 +122,13 @@ op.params
 ### Process QiwiPay confirmation callback
 After payment operation has been finished you will receive a confirmation callback request from Qiwi service. Use this request's `params` hash to build `QiwiPay::Confirmation` object.
 
-```
+```ruby
 conf = QiwiPay::Confirmation.new crds, request.params
 ```
 
 Now you have a seamless way to access confirmation data and perform some tests on it.
 
-```
+```ruby
 # Check if ip address is a valid Qiwi server address
 conf.valid_server_ip? request.ip
 => true
@@ -208,7 +208,7 @@ Following operations are available for now:
 
 #### Status operation
 ##### Create and perform `status` operation object
-```
+```ruby
 op = QiwiPay::Api::StatusOperation.new crds,
                                        merchant_site: 111111,
                                        txn_id: 11728960050,
@@ -219,7 +219,7 @@ response = op.perform
 Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow you to get text messages for errors, codes and statuses. See https://developer.qiwi.com/ru/qiwipay/index.html?json#txn_status
 
 ##### Operation succeeded
-```
+```ruby
 response.success?
 => true
 response.error_code
@@ -229,7 +229,7 @@ response.error_message
 ```
 
 ##### Operation failed
-```
+```ruby
 response.success?
 => false
 response.http_code
@@ -243,7 +243,7 @@ response.error_message
 #### Refund/reversal operation
 Both operations are performed in the same way, just use the right class.
 
-```
+```ruby
 op = QiwiPay::Api::RefundOperation.new crds,
                                        merchant_site: 111111,
                                        txn_id: 11728960050,
