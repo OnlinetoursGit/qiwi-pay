@@ -4,7 +4,7 @@ QiwiPay WPF/API binding for Ruby.
 
 Provides support for payment operations using QiwiPay WPF and API services.
 
-See https://developer.qiwi.com/ru/qiwipay for API description.
+See [Official QiwiPay documentation](https://developer.qiwi.com/ru/qiwipay) for detailed API description.
 
 ## Table of contents
 
@@ -51,23 +51,23 @@ To perform any request you must provide your QiwiPay credentials. For doing that
 # You can use PKCS#12 container
 p12 = OpenSSL::PKCS12.new(File.read('qiwi.p12'))
 
-crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
                                 p12: p12
 
 # ... or provide certificate and key objects explicitly
-crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
                                 cert: p12.certificate,
                                 key: p12.key
 
 # ... or load from separate files
-crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+crds = QiwiPay::Credentials.new secret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
                                 cert: 'my.crt',
                                 key: 'my.key'
 ```
 
 ### Create cheque object
 
-See https://developer.qiwi.com/ru/qiwipay/index.html?json#cheque for details.
+See [Cheque section of Official QiwiPay documentation](https://developer.qiwi.com/ru/qiwipay/index.html?json#cheque) for details.
 ```ruby
 cheque = QiwiPay::Cheque.new seller_id:        12345678901,
                              cheque_type:      QiwiPay::Cheque::Type::INFLOW,
@@ -88,7 +88,7 @@ Only two types of payment operations are available for now:
 
 Operations are used in very similar way. Use `QiwiPay::Wpf::SaleOperation` class for *sale* operation and `QiwiPay::Wpf::AuthOperation` class for *auth* operation.
 
-See https://developer.qiwi.com/ru/qiwipay/index.html?json#qiwipay-wpf for details.
+See [WPF section of Official QiwiPay documentation](https://developer.qiwi.com/ru/qiwipay/index.html?json#qiwipay-wpf) for details.
 
 #### Create payment operation object
 ```ruby
@@ -230,7 +230,7 @@ op = QiwiPay::Api::StatusOperation.new crds,
 response = op.perform
 ```
 
-Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow you to get text messages for errors, codes and statuses. See https://developer.qiwi.com/ru/qiwipay/index.html?json#txn_status
+Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow you to get text messages for errors, codes and statuses. See [Transaction statuses section of Official QiwiPay documentation](https://developer.qiwi.com/ru/qiwipay/index.html?json#txn_status)
 
 ##### Operation succeeded
 ```ruby
