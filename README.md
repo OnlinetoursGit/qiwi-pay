@@ -1,6 +1,8 @@
 # QiwiPay
 
-This gem allows you to communicate with QiwiPay service.
+QiwiPay WPF/API binding for Ruby.
+
+Provides support for payment operations using QiwiPay WPF and API services.
 
 See https://developer.qiwi.com/ru/qiwipay for API description.
 

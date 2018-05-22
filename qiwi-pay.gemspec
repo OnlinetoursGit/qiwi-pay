@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Michael Klimenko']
   spec.email         = ['mklimenko@onlinetours.ru']
 
-  spec.summary       = 'QiwiPay WPF/API support'
-  spec.description   = 'Provides support for payment operations using QiwiPay WPF and API service'
+  spec.summary       = 'QiwiPay WPF/API binding for Ruby'
+  spec.description   = 'Provides support for payment operations using QiwiPay WPF and API services'
 #  spec.homepage      = 'TODO: Put your gem's website or public repo URL here.'
   spec.license       = 'MIT'
 
