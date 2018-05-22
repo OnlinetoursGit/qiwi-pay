@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'QiwiPay WPF/API binding for Ruby'
   spec.description   = 'Provides support for payment operations using QiwiPay WPF and API services'
-#  spec.homepage      = 'TODO: Put your gem's website or public repo URL here.'
+  spec.homepage      = 'https://github.com/OnlinetoursGit/qiwi-pay'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
