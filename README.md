@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/OnlinetoursGit/qiwi-pay.svg?branch=master)](https://travis-ci.org/OnlinetoursGit/qiwi-pay)
 [![Maintainability](https://api.codeclimate.com/v1/badges/eb4dda5c934aec79ef99/maintainability)](https://codeclimate.com/github/OnlinetoursGit/qiwi-pay/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/eb4dda5c934aec79ef99/test_coverage)](https://codeclimate.com/github/OnlinetoursGit/qiwi-pay/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/qiwi-pay.svg)](https://badge.fury.io/rb/qiwi-pay)
 
 # QiwiPay
 
