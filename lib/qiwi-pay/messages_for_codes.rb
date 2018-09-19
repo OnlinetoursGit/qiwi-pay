@@ -67,7 +67,7 @@ module QiwiPay
       8165 => 'Transaction rejected: wrong payment details',
       8166 => 'Transaction rejected: wrong card details',
       8167 => 'Transaction rejected: wrong card details',
-      8168 => 'Transaction rejected: prohibited, contact card issuer'
+      8168 => 'Transaction rejected: prohibited, contact card issuer',
       8169 => 'Transaction rejected: not enought funds'
     }.freeze
 
