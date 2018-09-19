@@ -59,12 +59,16 @@ module QiwiPay
       8061 => 'Currency mismatch',
       8151 => 'Authentification failed',
       8152 => 'Transaction rejected by security service',
+      8160 => 'Transaction rejected: try again',
       8161 => 'Transaction rejected: try again',
       8162 => 'Transaction rejected: try again',
       8163 => 'Transaction rejected: contact QIWI support',
       8164 => 'Transaction rejected: not enought funds, contact card issuer',
       8165 => 'Transaction rejected: wrong payment details',
+      8166 => 'Transaction rejected: wrong card details',
+      8167 => 'Transaction rejected: wrong card details',
       8168 => 'Transaction rejected: prohibited, contact card issuer'
+      8169 => 'Transaction rejected: not enought funds'
     }.freeze
 
     # Transaction status description
