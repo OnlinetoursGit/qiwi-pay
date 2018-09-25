@@ -11,6 +11,10 @@ module QiwiPay
       @params = params.tap do |hs|
         hs.delete :sign
         hs.delete 'sign'
+        hs.delete :cheque
+        hs.delete 'cheque'
+        hs.delete :merchant_cheque
+        hs.delete 'merchant_cheque'
       end
       @secret = secret.to_s
     end

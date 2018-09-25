@@ -21,6 +21,18 @@ RSpec.describe QiwiPay::Signature do
       params['sign'] = 'sign2'
       expect(subject).to eq 'abc|asd|b|cdf|zzz'
     end
+
+    it 'should ignore `cheque` parameter' do
+      params[:cheque] = 'cheque1'
+      params['cheque'] = 'cheque2'
+      expect(subject).to eq 'abc|asd|b|cdf|zzz'
+    end
+
+    it 'should ignore `merchant_cheque` parameter' do
+      params[:merchant_cheque] = 'cheque1'
+      params['merchant_cheque'] = 'cheque2'
+      expect(subject).to eq 'abc|asd|b|cdf|zzz'
+    end
   end
 
   describe '#sign' do
