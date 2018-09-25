@@ -24,7 +24,7 @@ module QiwiPay::Wpf
         cf1 cf2 cf3 cf4 cf5
         product_name merchant_uid modifiers card_token order_expire
         callback_url success_url decline_url
-        cheque
+        merchant_cheque
       ].freeze
     end
   end
