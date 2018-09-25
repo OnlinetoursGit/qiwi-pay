@@ -33,6 +33,15 @@ RSpec.describe QiwiPay::Signature do
       params['merchant_cheque'] = 'cheque2'
       expect(subject).to eq 'abc|asd|b|cdf|zzz'
     end
+
+    it 'preserves input params value' do
+      params[:sign] = 'sign1'
+      params[:cheque] = 'cheque1'
+      params['merchant_cheque'] = 'cheque2'
+      params_before = Marshal.load( Marshal.dump(params) )
+      subject
+      expect(params).to eq params_before
+    end
   end
 
   describe '#sign' do

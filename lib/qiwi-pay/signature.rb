@@ -8,7 +8,7 @@ module QiwiPay
     # @param params [Hash] request parameters
     # @param secret [String] secret key for signature
     def initialize(params, secret)
-      @params = params.tap do |hs|
+      @params = params.dup.tap do |hs|
         hs.delete :sign
         hs.delete 'sign'
         hs.delete :cheque
