@@ -104,5 +104,10 @@ module QiwiPay
       return @cheque.encode if @cheque.is_a? Cheque
       @cheque
     end
+
+    def merchant_cheque
+      return @merchant_cheque.encode if @merchant_cheque.is_a? Cheque
+      @merchant_cheque
+    end
   end
 end
