@@ -34,6 +34,11 @@ module QiwiPay
   #   card_token        string(40)  Токен карты (если функционал токенизации включен для данного сайта)
   #   card_token_expire timestamp   Срок истечения токена карты (если функционал токенизации включен для данного сайта)
   #   sign              string(64)  Контрольная сумма переданных параметров. Контрольная сумма передается в верхнем регистре.
+  #   cheque            string      URL чека
+  #   cheque_link       string      URL чека
+  #   request_id
+  #   issuer_name
+  #   issuer_country
   #
   # @note {timestamp} data type is represented by string in format {YYYY-MM-DDThh:mm:ss±hh:mm}
   class Confirmation
@@ -48,6 +53,9 @@ module QiwiPay
       product_name
       card_token card_token_expire
       sign
+      cheque cheque_link
+      request_id
+      issuer_name issuer_country
     ].freeze
 
     # Parameters of integer type
