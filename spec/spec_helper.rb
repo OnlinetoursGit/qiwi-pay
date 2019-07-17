@@ -1,3 +1,4 @@
+require 'rspec/its'
 require 'qiwi-pay'
 require_relative 'support/external_requests'
 

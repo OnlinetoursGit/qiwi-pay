@@ -20,11 +20,16 @@ module QiwiPay::Api
     # @param response_code [Integer] HTTP response status code
     # @param response_body [String] Response body in JSON
     def initialize(response_code, response_body)
-      params = JSON.parse(response_body)
-      (INTEGER_PARAMS & params.keys).each do |p|
-        params[p] = params[p] && params[p].to_i
+      begin
+        params = JSON.parse(response_body)
+        (INTEGER_PARAMS & params.keys).each do |p|
+          params[p] = params[p] && params[p].to_i
+        end
+        super params
+      rescue JSON::ParserError
+        super error_code: -1
+        define_singleton_method :error_message, ->{ response_body }
       end
-      super params
       send(:http_code=, response_code)
     end
 

@@ -102,7 +102,11 @@ RSpec.describe QiwiPay::Api::StatusOperation do
     describe 'making forbidden request' do
       it 'raises error' do
         expect(api_client).to receive(:post).and_raise(RestClient::Forbidden)
-        expect { subject.perform }.to raise_error(RuntimeError)
+        r = subject.perform
+        expect(r).to be_a QiwiPay::Api::Response
+        expect(r.http_code).to eq 403
+        expect(r.error_code).to eq(-1)
+        expect(r.error_message).to eq 'Access denied'
       end
     end
   end

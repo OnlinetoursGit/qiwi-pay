@@ -237,6 +237,8 @@ response = op.perform
 
 Operations' `perform` methods return `QiwiPay::Api::Response` object. It allow you to get text messages for errors, codes and statuses. See [Transaction statuses section of Official QiwiPay documentation](https://developer.qiwi.com/ru/qiwipay/index.html?json#txn_status)
 
+In case the JSON API response parsing fails, the whole response body is returned by `Response`'s `error_message` method and the `error_code` is set to -1.
+
 ##### Operation succeeded
 ```ruby
 response.success?

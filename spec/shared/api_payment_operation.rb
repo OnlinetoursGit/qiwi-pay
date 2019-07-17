@@ -36,5 +36,24 @@ RSpec.shared_examples "api_payment_operation" do
         expect(r.txn_date).to eq '2017-03-09T17:16:06+00:00'
       end
     end
+
+    describe 'receiving http error from QiwiPay' do
+      before do
+        WebMock.stub_request(:post, %r{\Ahttps://acquiring\.qiwi\.com.+})
+               .to_return(status: 400,
+                          body: '<html><head><title>400 The SSL certificate error</title></head>'\
+                                '<body bgcolor="white"><center><h1>400 Bad Request</h1></center>'\
+                                '<center>The SSL certificate error</center></body></html>')
+      end
+
+      it 'perform signed POST request to QiwiPay API URL' do
+        r = subject.perform
+        expect(r).to be_a QiwiPay::Api::Response
+        expect(r.http_code).to eq 400
+        expect(r.error_code).to eq -1
+        expect(r.error_message).to include '400 The SSL certificate error'
+      end
+
+    end
   end
 end
