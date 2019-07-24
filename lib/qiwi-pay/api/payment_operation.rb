@@ -18,7 +18,8 @@ module QiwiPay::Api
     rescue RestClient::Unauthorized, RestClient::Forbidden
       Response.new 403, 'Access denied'
     rescue RestClient::ExceptionWithResponse => e
-      Response.new e.response.code, e.response.body
+      Response.new e.response && e.response.code,
+                   e.response ? e.response.body : e.to_s
     end
 
     private

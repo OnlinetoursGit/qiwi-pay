@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qiwi-pay (0.2.0)
+    qiwi-pay (0.2.1)
       rest-client (>= 1.8.0, < 2.1)
 
 GEM

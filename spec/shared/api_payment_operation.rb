@@ -55,5 +55,19 @@ RSpec.shared_examples "api_payment_operation" do
       end
 
     end
+
+    describe 'receiving timeout from QiwiPay' do
+      before do
+        WebMock.stub_request(:post, %r{\Ahttps://acquiring\.qiwi\.com.+}).to_timeout
+      end
+
+      it 'returns response with error description' do
+        r = subject.perform
+        expect(r).to be_a QiwiPay::Api::Response
+        expect(r.http_code).to be_nil
+        expect(r.error_code).to eq -1
+        expect(r.error_message).to eq 'Timed out connecting to server'
+      end
+    end
   end
 end
